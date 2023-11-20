@@ -1,0 +1,24 @@
+.search-container {
+    position: relative;
+}
+.search-input{
+    width: 50%;
+    padding: 8px;
+}
+
+.user-list{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 50%;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    list-style-type: none;
+}
+
+.user-item {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}

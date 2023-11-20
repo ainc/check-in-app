@@ -1,0 +1,31 @@
+{
+  "name": "slack-app-test",
+  "version": "1.0.0",
+  "private": true,
+  "description": "slack-app-test",
+  "author": "Ethan Gamble",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "axios": "^1.5.1",
+    "dotenv": "^16.3.1",
+    "gatsby": "^5.12.4",
+    "gatsby-plugin-image": "^3.12.3",
+    "gatsby-plugin-sass": "^6.12.3",
+    "gatsby-source-sanity": "^7.9.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-simple-keyboard": "^3.7.34",
+    "react-virtual-keyboard": "^1.0.2",
+    "sass": "^1.69.5",
+    "simple-keyboard": "^3.7.25"
+  }
+}
