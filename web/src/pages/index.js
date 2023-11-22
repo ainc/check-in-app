@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchBar from '../Components/SearchBar';
+import { graphql } from "gatsby";
 
-const SlackMessageButton = () => {
+export const query = graphql`
+query{
+  sanityTest {
+    title
+  }
+}`
+
+const SlackMessageButton = ({data}) => {
+  const test = data.sanityTest.title
   const [messageSent, setMessageSent] = useState(false);
   const [usersFetched, setUsersFetched] = useState(false);
   const [usersArray, setUsersArray] = useState([]);
@@ -53,6 +62,7 @@ const SlackMessageButton = () => {
 
   return (
     <div>
+      <h1>{test}</h1>
       <button onClick={sendMessageToSlack}>Send Slack Message</button>
       {messageSent && <p>Message sent successfully!</p>}
       {usersFetched && (
