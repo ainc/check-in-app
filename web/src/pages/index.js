@@ -1,75 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import SearchBar from '../Components/SearchBar';
+import React from 'react';
 import { graphql } from "gatsby";
+import { Container, Row } from 'react-bootstrap'
+import SendSlackMessage from '../Components/SendSlackMessage';
+import SearchBar from '../Components/SearchBar';
+import TeamMember from '../Components/TeamMember';
 
 export const query = graphql`
-query{
-  sanityTest {
-    title
+query MyQuery {
+  allSanityTeamMembers (filter: {name: {ne: "Nick Garnett"}}){
+    nodes {
+      picture {
+        asset {
+          gatsbyImageData(width: 150)
+        }
+      }
+      name
+      title
+      slackID
+    }
   }
 }`
 
-const SlackMessageButton = ({data}) => {
-  const test = data.sanityTest.title
-  const [messageSent, setMessageSent] = useState(false);
-  const [usersFetched, setUsersFetched] = useState(false);
-  const [usersArray, setUsersArray] = useState([]);
-
-  const slackAccessToken = process.env.GATSBY_SLACK_TOKEN
-  
-  const message = 'Hello, this is a test message!';
-  const channel = 'U03J93RNF7T' //can use either channel name or member ID to send to individuals
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
-    try{
-      axios({
-        method: 'post',
-        url: 'https://slack.com/api/users.list',
-        data: `token=${slackAccessToken}`
-      })
-      .then((response) => {
-        if (response.status === 200){
-          setUsersFetched(true)
-          setUsersArray(response.data.members);
-        }
-      })
-    } catch(error){
-      console.error("Could not query slack users", error);
-    }
-  };
-
-  const sendMessageToSlack = async () => {
-    try {
-      axios({
-        method: 'post',
-        url: 'https://slack.com/api/chat.postMessage',
-        data: `text=${message}&channel=${channel}&token=${slackAccessToken}`
-      })
-      .then((response) =>{
-        if (response.status === 200){
-          setMessageSent(true)
-        }
-      })
-    } catch (error) {
-      console.error('Error sending message to Slack:', error);
-    }
-  };
+const IndexPage = ({data}) => {
+  const teamMembers = data.allSanityTeamMembers.nodes
 
   return (
-    <div>
-      <h1>{test}</h1>
-      <button onClick={sendMessageToSlack}>Send Slack Message</button>
-      {messageSent && <p>Message sent successfully!</p>}
-      {usersFetched && (
-        <SearchBar users={usersArray} />
-      )}
-    </div>
+    <Container>
+      <Row lg={3}>
+       {teamMembers.map(node => (
+        <SendSlackMessage slackid={node.slackID}>
+          <TeamMember
+            name={node.name}
+            jobTitle={node.title}
+            image={node.picture.asset.gatsbyImageData}
+          />
+        </SendSlackMessage>
+        ))}
+      </Row>
+      <h2 className='text-center'>Don't see who you're looking for?</h2>
+      <h3 className='text-center font-italic'>Use the search bar below.</h3>
+      <Row>
+        <SearchBar />
+      </Row>
+    </Container>
   );
 };
 
-export default SlackMessageButton;
+export default IndexPage;

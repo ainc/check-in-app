@@ -3,19 +3,17 @@ import * as styles from './SearchBar.module.scss';
 import axios from 'axios';
 import  Keyboard  from 'react-simple-keyboard'; //https://hodgef.com/simple-keyboard/documentation/
 import 'react-simple-keyboard/build/css/index.css';
-
-
-const SearchBar = (props) => {
+import SendSlackMessage from './SendSlackMessage';
+import { Row } from 'react-bootstrap';
+const SearchBar = () => {
+    const [usersFetched, setUsersFetched] = useState(false);
+    const [usersArray, setUsersArray] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');  
     const [filteredUsers, setFilteredUsers] = useState([]);
-    const [messageSent, setMessageSent] = useState(false);
-    const usersArray = props.users;
-    const slackAccessToken = process.env.GATSBY_SLACK_TOKEN
-
-    const message = 'Hello, this is a test message!';
     const [layout, setLayout] = useState("default");
     const keyboard = useRef();
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+    const slackAccessToken = process.env.GATSBY_SLACK_TOKEN
 
     /* KEYBOARD */
     const onChange = input => {
@@ -50,72 +48,82 @@ const SearchBar = (props) => {
     
 
     /* SEARCH */
+
     useEffect(() => {
-        // Filter the user list based on the search query.
-        if(searchQuery) {
-            const searchQueryLower = searchQuery.toLowerCase();
-            const filtered = usersArray.filter(user => user.real_name && user.real_name.toLowerCase().includes(searchQueryLower));
-            setFilteredUsers(filtered);
+      // Filter the user list based on the search query - happens with each new letter typed in search
+      if(searchQuery) {
+          const searchQueryLower = searchQuery.toLowerCase();
+          const filtered = usersArray.filter(user => user.real_name && user.real_name.toLowerCase().includes(searchQueryLower));
+          setFilteredUsers(filtered);
         }
     }, [searchQuery, usersArray]);
     
+    useEffect(() => {
+      //get the list of users - only happens on page load
+      fetchUsers();
+    }, [])
+
+    const fetchUsers = async () => {
+      try{
+        await axios({
+          method: 'post',
+          url: 'https://slack.com/api/users.list',
+          data: `token=${slackAccessToken}`
+        })
+        .then((response) => {
+          if (response.status === 200){
+            setUsersFetched(true)
+            setUsersArray(response.data.members);
+            console.log(usersArray)
+          }
+        })
+      } catch(error){
+        console.error("Could not query slack users", error);
+      }
+    };
+
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
     };
 
-    const sendMessageToSlack = async (userID) => {
-        try {
-          axios({
-            method: 'post',
-            url: 'https://slack.com/api/chat.postMessage',
-            data: `text=${message}&channel=${userID}&token=${slackAccessToken}`
-          })
-          .then((response) =>{
-            if (response.status === 200){
-              setMessageSent(true)
-            }
-          })
-        } catch (error) {
-          console.error('Error sending message to Slack:', error);
-        }
-    };
-
-    const goToNewPage = () => {
-        window.location.href = '/message-sent'
-    }
 
     return(
+      <div>
+        {usersFetched && (
         <div className={styles.searchContainer}>
             <input
             type="text"
-            placeholder="Search for a user"
+            placeholder=""
             value={searchQuery}
             onChange={handleSearchChange}
             onFocus={onFocus}
             className={styles.searchInput}
             />
-
-            {isKeyboardVisible && (
-            <div className='simple-keyboard'>
-            <Keyboard
-            keyboardRef={r => (keyboard.current = r)}
-            layoutName={layout}
-            onChange={onChange}
-            onKeyPress={onKeyPress}
-            />
-            </div>
-            )}
-
-            <ul className= {styles.userList}>
+        </div>
+        )}
+        {isKeyboardVisible && (
+                      <Row className='simple-keyboard'>
+                      <Keyboard
+                      keyboardRef={r => (keyboard.current = r)}
+                      layoutName={layout}
+                      onChange={onChange}
+                      onKeyPress={onKeyPress}
+                      />
+                      </Row>
+                      )}
+        <div>
+        <ul className= {styles.userList}>
                 {filteredUsers.map((user, index) =>
-                <li onClick={() => sendMessageToSlack(user.id)} key={index} className={styles.userItem}>
-                    <img src={user.profile.image_72} alt='profile pic' style={{borderRadius: '50%'}}/>
-                    <p>{user.real_name}</p>
-                    {messageSent && goToNewPage()}
-                </li>
+                <SendSlackMessage slackid={user.id}>
+                  <li key={index} className={`${styles.userItem} mb-3 fluid`}>
+                      <img src={user.profile.image_192} alt='profile pic' className='rounded-circle mb-3'/>
+                      <h4 className=''>{user.real_name}</h4>
+                  </li>
+                </SendSlackMessage>
                 )}
             </ul>
         </div>
+      </div>
     );
 };
 

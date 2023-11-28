@@ -1,16 +1,18 @@
 .search-container {
-    position: relative;
+    display: flex;
+    justify-content: center;
 }
 .search-input{
-    width: 50%;
+    width: 70%;
     padding: 8px;
+    border-radius: 20px;
 }
 
 .user-list{
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -18,7 +20,9 @@
 }
 
 .user-item {
-    padding: 8px;
-    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
     cursor: pointer;
 }

@@ -1,3 +1,3 @@
-import test from "./documents/test"
+import teamMembers from "./documents/teamMembers"
 
-export const schemaTypes = [test]
+export const schemaTypes = [teamMembers]
