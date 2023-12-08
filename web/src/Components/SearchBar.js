@@ -5,6 +5,7 @@ import  Keyboard  from 'react-simple-keyboard'; //https://hodgef.com/simple-keyb
 import 'react-simple-keyboard/build/css/index.css';
 import SendSlackMessage from './SendSlackMessage';
 import { Row } from 'react-bootstrap';
+
 const SearchBar = () => {
     const [usersFetched, setUsersFetched] = useState(false);
     const [usersArray, setUsersArray] = useState([]);

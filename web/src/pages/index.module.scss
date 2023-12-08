@@ -1,0 +1,12 @@
+.fullscreen-image {
+    background-image: url('../images/Welcome-Screen.png'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Ensure the image is behind other content */
+}
