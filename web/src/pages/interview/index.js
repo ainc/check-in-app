@@ -1,14 +1,13 @@
 import React from 'react';
 import { graphql } from "gatsby";
-import { Container, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import SendSlackMessage from '../../Components/SendSlackMessage';
 import SearchBar from '../../Components/SearchBar';
 import TeamMember from '../../Components/TeamMember';
-import * as styles from './meeting-someone.module.scss';
-
+import * as styles from '../meeting-someone/meeting-someone.module.scss'
 export const query = graphql`
 query MyQuery {
-  allSanityTeamMembers(filter: {name: {nin: ["Nick Garnett", "Kyle Raney"]}}) {
+  allSanityTeamMembers(filter: {name: {nin: ["Nick Garnett", "Keith McMunn"]}}) {
     nodes {
       picture {
         asset {
@@ -32,8 +31,8 @@ const MeetingSomeonePage = ({data}) => {
           <g transform="scale(-1,1) translate(-500,0)">
           <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style={{stroke: 'none', fill:'red'}}></path>
           </g>
-          <text x="250" y="50" font-size="23" fill="white" text-anchor="middle" alignment-baseline="middle" font-weight="bold" font-family="Arial, sans-serif">
-          WHO ARE YOU HERE TO SEE?
+          <text x="250" y="50" font-size="20" fill="white" text-anchor="middle" alignment-baseline="middle" font-weight="bold" font-family="Arial, sans-serif">
+          Who are you here to see?
           </text>
         </svg>
           <h1 className='text-center mb-5 text-white'>Who are you here to see?</h1>

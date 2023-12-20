@@ -1,6 +1,8 @@
 import React from 'react';
+import { graphql } from "gatsby";
 import { Container, Row, Col } from 'react-bootstrap';
 import MenuButton from '../../Components/MenuButton';
+import SendSlackMessage from '../../Components/SendSlackMessage';
 
 import Balloons from '../../images/Balloons.png';
 import TourIcon from '../../images/Tour-Icon.png';
@@ -8,46 +10,58 @@ import PeopleMeeting from '../../images/People-Meeting.png'
 import Interview from '../../images/Interview-Icon.png'
 import Conference from '../../images/TableChairs.png'
 import Triangle from '../../images/Triangle.png'
-const MenuPage = () => {
+
+export const query = graphql`
+query MyQuery {
+    allSanityTeamMembers(filter: {name: {in: ["Nick Garnett", "Connor Jones"]}}) { 
+      nodes {
+        slackID
+      }
+    }
+}`
+
+const MenuPage = ({data}) => {
+    const teamMembers = data.allSanityTeamMembers.nodes;
+    const slackids = teamMembers.map((node) => node.slackID)
     return (
-        <div style={{backgroundColor: '#F1F2F2'}}>
-        <Container>
-            <Row >
-                <a href='/' style={{right: '10rem'}}>
-                    <h4 className='text-black font-italic'>Go back</h4>
-                </a>
+        <div>
+            <Row className='text-center pt-5'>
+                <h1 className='font-weight-bold' style={{fontSize: '4rem'}}>WHAT BRINGS YOU IN TODAY?</h1>
             </Row>
-            <Row className='text-center'>
-                <h1>WHAT BRINGS YOU IN TODAY?</h1>
-            </Row>
-            <Row className=''>
+            <Row className='pt-5'>
                 <Col className='d-flex justify-content-end'>
-                    <MenuButton img={TourIcon} title='Space Tour' link='/tour'/>
+                    <SendSlackMessage slackid={slackids}>
+                        <MenuButton img={TourIcon} title='Space Tour' link='/space-team'/>
+                    </SendSlackMessage>
                 </Col>
                 <Col>
                     <MenuButton img={PeopleMeeting} title="Meeting Someone" link='/meeting-someone'/>
                 </Col>
             </Row>
-            <Row lg={2}>
+            <Row className='pt-5'>
                 <Col className='d-flex justify-content-end'>
                     <MenuButton img={Interview} title="Interview" link='/interview'/>
                 </Col>
                 <Col>
-                    <MenuButton img={Conference} title="Conference Room Rental" link='/conference-room'/>
+                    <SendSlackMessage slackid={slackids}>
+                        <MenuButton img={Conference} title="Conference Room Rental" link='/space-team'/>
+                    </SendSlackMessage>
                 </Col>
             </Row>
-            <Row>
+            <Row className='pt-5'>
                 <Col className='d-flex justify-content-end'>
-                    <MenuButton img={Balloons} title="An Event" link='/event'/>
+                    <SendSlackMessage slackid={slackids}>
+                        <MenuButton img={Balloons} title="An Event" link='/space-team'/>
+                    </SendSlackMessage>
                 </Col>
                 <Col>
-                    <MenuButton img={Triangle} title="What's Awesome Inc?" link='/what-is-ainc' />
+                    <SendSlackMessage slackid={slackids}>
+                        <MenuButton img={Triangle} title="What's Awesome Inc?" link='/what-is-ainc' />
+                    </SendSlackMessage>
                 </Col>
             </Row>
-        </Container>
         </div>
     )
 }
-
 
 export default MenuPage;

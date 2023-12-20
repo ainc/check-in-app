@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 
-const MessageSentPage = () => {
+const MessageSent = (props) => {
     useEffect(() => {
         // Redirect after x000 milliseconds (x seconds)
         const timeoutId = setTimeout(() => {
           window.location.href = '/'; // Replace '/' with the path to your homepage
-        }, 5000);
+        }, 7000);
     
         // Clear the timeout when the component unmounts (optional)
         return () => clearTimeout(timeoutId);
@@ -13,9 +13,9 @@ const MessageSentPage = () => {
 
     return(
         <div>
-            <p>Message sent successfully!</p>
+            {props.children}
         </div>
     )
 }
 
-export default MessageSentPage;
+export default MessageSent;
