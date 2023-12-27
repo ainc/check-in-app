@@ -5,19 +5,19 @@ const SendSlackMessage = (props) => {
     const [messageSent, setMessageSent] = useState(false);
 
     const slackAccessToken = process.env.GATSBY_SLACK_TOKEN
-    const channel = 'U03J93RNF7T' //can use either channel name or member ID to send to individuals
+    const channel = props.channel //can use either channel name or member ID to send to individuals
     var message;
     const goToNewPage = () => {
-        window.location.href = '/what-is-ainc'
+        window.location.href = props.link
     }
 
     const sendMessageToSlack = async () => {
       if (Array.isArray(props.slackid)) {
         const mentionedUsers = props.slackid.map((slackid) => `<@${slackid}>`).join(', ');
-        message = `${mentionedUsers} Hello, this is a test message!`;
+        message = `${mentionedUsers} ${props.message}`;
       }
       else {
-        message = `<@${props.slackid}> Hello, this is a test message!`;
+        message = `<@${props.slackid}> ${props.message}`;
       }
         try {
           axios({

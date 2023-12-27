@@ -4,10 +4,11 @@ import {Row, Col } from 'react-bootstrap'
 import MessageSent from '../../Components/MessageSent';
 import Confetti from '../../images/Confetti-Popper.png';
 import TeamMember from '../../Components/TeamMember';
+import GoBackButton from '../../Components/GoBackButton';
 
 export const query = graphql`
 query MyQuery {
-  allSanityTeamMembers(filter: {name: {in: ["Nick Garnett", "Connor Jones"]}}) {
+  allSanityTeamMembers(filter: {name: {in: ["Nick Garnett", "Conner Jones"]}}) {
     nodes {
       picture {
         asset {
@@ -26,6 +27,7 @@ const SpaceTeam = ({data}) => {
     return(
         <MessageSent>
         <div style={{backgroundColor: '#323232', minHeight: '100vh'}}>
+        <GoBackButton link='/menu' invert={true}/>
             <img src={Confetti} alt='Confetti Popper' style={{width: '20rem', position: 'absolute', top: '20rem', left: '41%'}}></img>
             <h1 className='text-white text-uppercase text-center' style={{fontSize: '4rem', position: 'absolute', top:'45rem'}}>
                 Thanks for letting us know you're here.
