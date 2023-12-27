@@ -12,7 +12,7 @@ import PeopleMeeting from '../../images/People-Meeting.png'
 import Interview from '../../images/Interview-Icon.png'
 import Conference from '../../images/TableChairs.png'
 import Triangle from '../../images/Triangle.png'
-
+import './menu.module.scss'
 export const query = graphql`
 query MyQuery {
     allSanityTeamMembers(filter: {name: {in: ["Nick Garnett", "Conner Jones"]}}) { 
