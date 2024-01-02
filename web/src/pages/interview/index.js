@@ -9,7 +9,7 @@ import GoBackButton from '../../Components/GoBackButton';
 import ScreenTimeout from '../../Components/ScreenTimeout';
 export const query = graphql`
 query MyQuery {
-  allSanityTeamMembers(filter: {name: {nin: ["Nick Garnett", "Keith McMunn"]}}) {
+  allSanityTeamMembers(filter: {name: {nin: ["Nick Garnett", "Keith McMunn", "Emily Wehrle"]}}) {
     nodes {
       picture {
         asset {

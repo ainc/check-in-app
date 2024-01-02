@@ -75,7 +75,6 @@ const SearchBar = () => {
           if (response.status === 200){
             setUsersFetched(true)
             setUsersArray(response.data.members);
-            console.log(usersArray)
           }
         })
       } catch(error){

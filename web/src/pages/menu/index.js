@@ -40,12 +40,16 @@ const MenuPage = ({data}) => {
                     </SendSlackMessage>
                 </Col>
                 <Col>
-                    <MenuButton img={PeopleMeeting} title="Meeting Someone" link='/meeting-someone'/>
+                    <button style={{border: 'none', backgroundColor: 'transparent'}}>
+                        <MenuButton img={PeopleMeeting} title="Meeting Someone" link='/meeting-someone'/>
+                    </button>
                 </Col>
             </Row>
             <Row className='pt-5'>
                 <Col className='d-flex justify-content-end'>
-                    <MenuButton img={Interview} title="Interview" link='/interview'/>
+                    <button style={{border: 'none', backgroundColor: 'transparent'}}>
+                        <MenuButton img={Interview} title="Interview" link='/interview'/>
+                    </button>
                 </Col>
                 <Col>
                     <SendSlackMessage slackid={slackids} link='/space-team' channel={channel} message='Someone is here for a conference room rental!'>
@@ -66,7 +70,7 @@ const MenuPage = ({data}) => {
                 </Col>
             </Row>
         </div>
-        </ScreenTimeout>
+    </ScreenTimeout>
     )
 }
 
