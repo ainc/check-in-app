@@ -21,7 +21,8 @@ export default {
         {
             name: 'slackID',
             type: 'string',
-            title: 'Slack ID'
+            title: 'Slack ID',
+            description: "Found by going to the persons slack profile, clicking the three dots and clicking 'Copy Member ID'",
         }
     ]
 }
