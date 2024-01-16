@@ -25,10 +25,10 @@
     - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
 
 ## 🚀 Quick start (Studio Folder)
-    ```shell
+    
     cd studio
     npm run dev
-    ```
+    
 Edit the 'Team Members' document in order to add new people.
 To change which people are displayed on each page, go to the page and edit the query.
 The 'Slack ID' field can be found by going to the person's slack profile, clicking the three dots and clicking 'Copy Member ID'. This must be exact in order to correctly message the person.
