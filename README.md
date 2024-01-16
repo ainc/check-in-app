@@ -29,5 +29,5 @@
     cd studio
     npm run dev
     ```
-    Edit the 'Team Members' document in order to add new people.
-    To change which people are displayed on each page, go to the page and edit the query.
+Edit the 'Team Members' document in order to add new people.
+To change which people are displayed on each page, go to the page and edit the query.
