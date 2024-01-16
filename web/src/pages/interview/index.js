@@ -7,6 +7,8 @@ import TeamMember from '../../Components/TeamMember';
 import * as styles from '../meeting-someone/meeting-someone.module.scss';
 import GoBackButton from '../../Components/GoBackButton';
 import ScreenTimeout from '../../Components/ScreenTimeout';
+
+//change 'nin' in query based on who you want to appear on screen
 export const query = graphql`
 query MyQuery {
   allSanityTeamMembers(filter: {name: {nin: ["Nick Garnett", "Keith McMunn", "Emily Wehrle"]}}) {
