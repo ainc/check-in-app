@@ -27,6 +27,7 @@ query MyQuery {
 
 const MeetingSomeonePage = ({data}) => {
   const teamMembers = data.allSanityTeamMembers.nodes
+  const channel = 'check-in'
 
   return (
     <ScreenTimeout>
@@ -45,7 +46,7 @@ const MeetingSomeonePage = ({data}) => {
         </Row>
         <Row lg={3} style={{display: 'flex', justifyContent: 'center', height: '45vh', flexWrap: 'wrap'}} className='pt-5'>
         {teamMembers.map(node => (
-          <SendSlackMessage slackid={node.slackID} teamPage={true} link='/what-is-ainc' channel={node.slackID} message='Someone is here to meet with you!'>
+          <SendSlackMessage slackid={node.slackID} teamPage={true} link='/what-is-ainc' channel={channel} message='Someone is here to meet with you!'>
             <Col style={{maxWidth: '300px'}}>
             <TeamMember
               name={node.name}

@@ -67,7 +67,7 @@ const MenuPage = ({data}) => {
                     </SendSlackMessage>
                 </Col>
                 <Col>
-                    <SendSlackMessage slackid={slackids} link='/what-is-ainc'>
+                    <SendSlackMessage slackid={slackids} link='/what-is-ainc' channel={channel} message='Someone is here to learn about Awesome Inc'>
                         <MenuButton img={Triangle} title="What's Awesome Inc?" link='/what-is-ainc' channel='' message='Someone is here who does not know Awesome Inc!'/>
                     </SendSlackMessage>
                 </Col>
