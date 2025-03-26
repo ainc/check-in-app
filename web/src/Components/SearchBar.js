@@ -15,6 +15,7 @@ const SearchBar = () => {
     const keyboard = useRef();
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
     const slackAccessToken = process.env.GATSBY_SLACK_TOKEN
+    const channel = 'check-in'
 
     /* KEYBOARD */
     const onChange = input => {
@@ -114,7 +115,7 @@ const SearchBar = () => {
         <div>
         <ul className= {styles.userList}>
                 {filteredUsers.map((user, index) =>
-                <SendSlackMessage slackid={user.id} link='/what-is-ainc' channel='check-in' message='Someone is here to see you in the front!'>
+                <SendSlackMessage slackid={user.id} link='/what-is-ainc' channel={channel} message='Someone is here to see you in the front!'>
                   <li key={index} className={`${styles.userItem} mb-3 fluid`}>
                       <img src={user.profile.image_192} alt='profile pic' className='rounded-circle mb-3'/>
                       <h4 className=''>{user.real_name}</h4>
