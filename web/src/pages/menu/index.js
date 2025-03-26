@@ -18,7 +18,7 @@ import './menu.module.scss' //removes overflow
 
 export const query = graphql`
 query MyQuery {
-    allSanityTeamMembers(filter: {name: {in: ["Nick Garnett", "Conner Jones"]}}) { 
+    allSanityTeamMembers(filter: {name: {in: ["Kevin Mansur"]}}) { 
       nodes {
         slackID
       }

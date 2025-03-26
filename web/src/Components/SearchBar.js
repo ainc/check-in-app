@@ -114,7 +114,7 @@ const SearchBar = () => {
         <div>
         <ul className= {styles.userList}>
                 {filteredUsers.map((user, index) =>
-                <SendSlackMessage slackid={user.id} link='/what-is-ainc' channel={user.id} message='Someone is here to see you in the front!'>
+                <SendSlackMessage slackid={user.id} link='/what-is-ainc' channel='check-in' message='Someone is here to see you in the front!'>
                   <li key={index} className={`${styles.userItem} mb-3 fluid`}>
                       <img src={user.profile.image_192} alt='profile pic' className='rounded-circle mb-3'/>
                       <h4 className=''>{user.real_name}</h4>

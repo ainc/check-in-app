@@ -8,7 +8,7 @@ import GoBackButton from '../../Components/GoBackButton';
 
 export const query = graphql`
 query MyQuery {
-  allSanityTeamMembers(filter: {name: {in: ["Nick Garnett", "Conner Jones"]}}) {
+  allSanityTeamMembers(filter: {name: {in: ["Kevin Mansur"]}}) {
     nodes {
       picture {
         asset {
@@ -35,9 +35,9 @@ const SpaceTeam = ({data}) => {
             <p className='text-white text-center' style={{fontStyle: 'italic', fontSize: '2.5rem', position: 'absolute', top: '58rem'}}>
                 Grab a seat on the red couches and someone from our Workspace team will be with you shortly.
             </p>
-            <Row style={{position: 'absolute', top: '75rem', left: '25%'}}>
+            <Row style={{position: 'absolute', top: '75rem', width: '100%', display: 'flex', justifyContent: 'center'}}>
             {teamMembers.map(node => (
-                <Col style={{maxWidth: '400px', marginRight: '2rem'}}>
+                <Col style={{maxWidth: '400px'}}>
                     <TeamMember
                     name={node.name}
                     jobTitle={node.title}
