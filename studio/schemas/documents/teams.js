@@ -4,8 +4,8 @@ export default {
     title: "teams",
     fields: [
         {
-            title: "spaceTeam",
-            name: "Space Team",
+            title: "space Team",
+            name: "SpaceTeam",
             type: "reference",
             to: [{ type: "teamMembers" }],
           },
