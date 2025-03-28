@@ -10,6 +10,7 @@ export default {
             options: {
                 list: [
                 { title: 'Space Team', value: 'space_team' },
+                { title: 'Interview Team', value: 'Interview_team'},
                 ]
             }
         },
