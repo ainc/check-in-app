@@ -17,7 +17,7 @@ export default {
             title: "team Memebers",
             name: "teamMemebers",
             type: "array",
-            of: [{ type: "refrence", to: [{ type: "teamMembers" }] }],
+            of: [{ type: "reference", to: [{ type: "teamMembers" }] }],
           },
     ]
 }
