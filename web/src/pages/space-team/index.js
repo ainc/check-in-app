@@ -8,21 +8,25 @@ import GoBackButton from '../../Components/GoBackButton';
 
 export const query = graphql`
 query MyQuery {
-  allSanityTeamMembers(filter: {name: {in: ["Kevin Mansur"]}}) {
+  allSanityTeams(filter: {team: {eq: "space_team"}}) {
     nodes {
-      picture {
-        asset {
-          gatsbyImageData(width: 250)
+      teamMemebers {
+        slackID
+        title
+        name
+        picture {
+          asset {
+            gatsbyImageData(width: 250)
+          }
         }
       }
-      name
-      title
     }
   }
 }`
 
 const SpaceTeam = ({data}) => {
-    const teamMembers = data.allSanityTeamMembers.nodes
+    const teamMembers = data.allSanityTeams.nodes[0].teamMemebers
+    console.log(teamMembers)
 
     return(
         <MessageSent>

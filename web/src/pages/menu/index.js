@@ -14,20 +14,26 @@ import Conference from '../../images/TableChairs.png'
 import Triangle from '../../images/Triangle.png'
 import './menu.module.scss' //removes overflow
 
-//change 'nin' in query based on who you want to appear on screen
-
 export const query = graphql`
 query MyQuery {
-    allSanityTeamMembers(filter: {name: {in: ["Kevin Mansur"]}}) { 
+    allSanityTeams(filter: {team: {eq: "space_team"}}) {
       nodes {
-        slackID
+        teamMemebers {
+            slackID
+        }
       }
     }
 }`
 
 const MenuPage = ({data}) => {
-    const teamMembers = data.allSanityTeamMembers.nodes;
-    const slackids = teamMembers.map((node) => node.slackID)
+    var slackids
+    const teamMembers = data.allSanityTeams.nodes[0];
+    if (teamMembers.length > 1){
+        slackids = teamMembers.teamMemebers.map((node) => node.slackID)
+    }
+    else{
+        slackids = teamMembers.teamMemebers[0].slackID
+    }
     const channel = 'check-in'
     return (
         <ScreenTimeout>
