@@ -11,7 +11,7 @@ import ScreenTimeout from '../../Components/ScreenTimeout';
 //change 'nin' in query based on who you want to appear on screen
 export const query = graphql`
 query MyQuery {
-  allSanityTeams(filter: {team: {eq: "Interview_team"}}) {
+  allSanityTeams(filter: {team: {eq: "Interview Team"}}) {
     nodes {
       teamMemebers {
         slackID

@@ -9,8 +9,8 @@ export default {
             type: 'string',
             options: {
                 list: [
-                { title: 'Space Team', value: 'space_team' },
-                { title: 'Interview Team', value: 'Interview_team'},
+                { title: 'Space Team', value: 'Space Team' },
+                { title: 'Interview Team', value: 'Interview Team'},
                 ]
             }
         },

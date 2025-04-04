@@ -8,7 +8,7 @@ import GoBackButton from '../../Components/GoBackButton';
 
 export const query = graphql`
 query MyQuery {
-  allSanityTeams(filter: {team: {eq: "space_team"}}) {
+  allSanityTeams(filter: {team: {eq: "Space Team"}}) {
     nodes {
       teamMemebers {
         slackID
