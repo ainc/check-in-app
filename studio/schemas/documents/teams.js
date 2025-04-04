@@ -1,7 +1,7 @@
 export default {
     name: "Teams",
     type: "document",
-    title: "teams",
+    title: "Teams",
     fields: [
         {
             title: "Select Team",
