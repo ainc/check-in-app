@@ -28,13 +28,16 @@ query MyQuery {
 const MenuPage = ({data}) => {
     var slackids
     const teamMembers = data.allSanityTeams.nodes[0];
-    if (teamMembers.length > 1){
-        slackids = teamMembers.teamMemebers.map((node) => node.slackID)
+
+    const arr = teamMembers.teamMemebers;
+    if (Array.isArray(arr)) {
+        slackids = arr.map((node) => node.slackID)
+    } else {
+        console.log('teamMemebers is not an array:', arr);
     }
-    else{
-        slackids = teamMembers.teamMemebers[0].slackID
-    }
+    
     const channel = 'check-in'
+    console.log(slackids)
     return (
         <ScreenTimeout>
         <div style={{backgroundColor: '#F2F2F2', minHeight: '100vh'}}>
